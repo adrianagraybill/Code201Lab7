@@ -1,0 +1,8 @@
+thead {
+    background: rgb(177, 177, 177);
+  }
+  
+  td {
+    padding: 20px;
+    border: solid 1px black;
+  }
