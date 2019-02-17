@@ -4,7 +4,7 @@ var hours = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '
 
 var table = document.getElementById('shell');
 
-function Location(name, minCust, maxCust, avgSale, sum, total) {
+function Location (name, minCust, maxCust, avgSale, sum, total) {
   this.name = name;
   this.minCust = minCust;
   this.maxCust = maxCust;
@@ -19,7 +19,7 @@ function Location(name, minCust, maxCust, avgSale, sum, total) {
     this.total = cookiePerHr + this.total;
   }
 
-  this.render = function(){ 
+  this.render = function() {
     // Location name
     var row = document.createElement('tr');
     var locName = document.createElement('td');
