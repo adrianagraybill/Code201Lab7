@@ -35,6 +35,9 @@ for (var i = 0; i < hours.length; i++) {
   header.innerText = hours[i];
   headerRow.appendChild(header);
 }
+var lastDesc = document.createElement('td');
+lastDesc.innerText = 'Daily Location Total';
+headerRow.appendChild(lastDesc);
 
 table.appendChild(headerRow);
 
@@ -51,6 +54,10 @@ for (var i = 0; i < locations.length; i++) {
     data.innerText = locations[i].sum[col];
     row.appendChild(data);
   }
+  var locTotals = document.createElement('td');
+  locTotals.innerText = locations[i].total;
+  row.appendChild(locTotals);
+
   table.appendChild(row);
 }
 
