@@ -1,164 +1,56 @@
 'use strict';
 
-var hours = [
-  '6am',
-  '7am',
-  '8am',
-  '9am',
-  '10am',
-  '11am',
-  '12pm',
-  '1pm',
-  '2pm',
-  '3pm',
-  '4pm',
-  '5pm',
-  '6pm',
-  '7pm',
-  '8pm',
-];
+var hours = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm', '8pm',];
 
-var pikeUl = document.getElementById('pike');
+var table = document.getElementById('shell');
 
-var seatacUl = document.getElementById('seatac');
+function Location(name, minCust, maxCust, avgSale, sum, total) {
+  this.name = name;
+  this.minCust = minCust;
+  this.maxCust = maxCust;
+  this.avgSale = avgSale;
+  this.sum = sum;
+  this.total = total;
 
-var centerUl = document.getElementById('center');
-
-var hillUl = document.getElementById('hill');
-
-var alkiUl = document.getElementById('alki');
-
-var pike = {
-  name: 'Pike Place',
-  minCust: 23,
-  maxCust: 65,
-  avgSale: 6.3,
-  sum: [],
-  total: 0,
-  render: function () {
-    for (var i = 0; i <hours.length; i++) {
-      var answer = Math.floor(Math.random() * ((this.maxCust + 1) - this.minCust)) + this.minCust;
-      var cookiePerHr = Math.floor(answer * this.avgSale);
-      var liEl = document.createElement('li');
-      liEl.textContent = `${hours[i]}: ${cookiePerHr} cookies.`;
-      pikeUl.appendChild(liEl);
-      this.sum.push(cookiePerHr);
-      this.total = cookiePerHr + this.total;
-    }
+  for (var i = 0; i < hours.length; i++) {
+    var answer = Math.floor(Math.random() * ((this.maxCust + 1) - this.minCust)) + this.minCust;
+    var cookiePerHr = Math.floor(answer * this.avgSale);
+    this.sum.push(cookiePerHr);
+    this.total = cookiePerHr + this.total;
   }
-};
+}
 
-pike.render();
-var liEl = document.createElement('li');
-liEl.textContent = `Total: ${pike.total} cookies.`;
-pikeUl.appendChild(liEl);
-console.log('pike.sum',pike.sum);
-console.log('pike.total',pike.total);
+var pike = new Location('Pike Place', 23, 65, 6.3, [], 0);
+var seatac = new Location('SeaTac Airport', 3, 24, 1.2, [], 0);
+var center = new Location('Seattle Center', 11, 38, 3.7, [], 0);
+var hill = new Location('Capital Hill', 20, 38, 2.3, [], 0);
+var alki = new Location('Alki', 2, 16, 4.6, [], 0);
 
-var seatac = {
-  name: 'SeaTac Airport',
-  minCust: 3,
-  maxCust: 24,
-  avgSale: 1.2,
-  sum: [],
-  total: 0,
-  render: function () {
-    for (var i = 0; i <hours.length - 1; i++) {
-      var answer = Math.floor(Math.random() * ((this.maxCust + 1) - this.minCust)) + this.minCust;
-      var cookiePerHr = Math.floor(answer * this.avgSale);
-      var liEl = document.createElement('li');
-      liEl.textContent = `${hours[i]}: ${cookiePerHr} cookies.`;
-      seatacUl.appendChild(liEl);
-      this.sum.push(cookiePerHr);
-      this.total = cookiePerHr + this.total;
-    }
-  },
-};
+var headerRow = document.createElement('tr');
+var blank = document.createElement('th');
+headerRow.appendChild(blank);
 
-seatac.render();
-var liEl = document.createElement('li');
-liEl.textContent = `Total: ${seatac.total} cookies.`;
-seatacUl.appendChild(liEl);
-console.log('seatac.sum',seatac.sum);
-console.log('seatac.total',seatac.total);
+for (var i = 0; i < hours.length; i++) {
+  var header = document.createElement('th');
+  header.innerText = hours[i];
+  headerRow.appendChild(header);
+}
 
-var center = {
-  name: 'Seattle Center',
-  minCust: 11,
-  maxCust: 38,
-  avgSale: 3.7,
-  sum: [],
-  total: 0,
-  render: function () {
-    for (var i = 0; i <hours.length; i++) {
-      var answer = Math.floor(Math.random() * ((this.maxCust + 1) - this.minCust)) + this.minCust;
-      var cookiePerHr = Math.floor(answer * this.avgSale);
-      var liEl = document.createElement('li');
-      liEl.textContent = `${hours[i]}: ${cookiePerHr} cookies.`;
-      centerUl.appendChild(liEl);
-      this.sum.push(cookiePerHr);
-      this.total = cookiePerHr + this.total;
-    }
+table.appendChild(headerRow);
+
+var locations = [pike,seatac,center,hill,alki];
+
+for (var i = 0; i < locations.length; i++) {
+  var row = document.createElement('tr');
+  var locName = document.createElement('td');
+  locName.innerText = locations[i].name;
+  row.appendChild(locName);
+
+  for (var col = 0; col < hours.length; col++) {
+    var data = document.createElement('td');
+    data.innerText = locations[i].sum[col];
+    row.appendChild(data);
   }
-};
+  table.appendChild(row);
+}
 
-center.render();
-var liEl = document.createElement('li');
-liEl.textContent = `Total: ${center.total} cookies.`;
-centerUl.appendChild(liEl);
-console.log('center.sum',center.sum);
-console.log('center.total',center.total);
-
-var hill = {
-  name: 'Capital Hill',
-  minCust: 20,
-  maxCust: 38,
-  avgSale: 2.3,
-  sum: [],
-  total: 0,
-  render: function () {
-    for (var i = 0; i <hours.length; i++) {
-      var answer = Math.floor(Math.random() * ((this.maxCust + 1) - this.minCust)) + this.minCust;
-      var cookiePerHr = Math.floor(answer * this.avgSale);
-      var liEl = document.createElement('li');
-      liEl.textContent = `${hours[i]}: ${cookiePerHr} cookies.`;
-      hillUl.appendChild(liEl);
-      this.sum.push(cookiePerHr);
-      this.total = cookiePerHr + this.total;
-    }
-  }
-};
-
-hill.render();
-var liEl = document.createElement('li');
-liEl.textContent = `Total: ${hill.total} cookies.`;
-hillUl.appendChild(liEl);
-console.log('hill.sum',hill.sum);
-console.log('hill.total',hill.total);
-
-var alki = {
-  name: 'Alki',
-  minCust: 2,
-  maxCust: 16,
-  avgSale: 4.6,
-  sum: [],
-  total: 0,
-  render: function () {
-    for (var i = 0; i <hours.length; i++) {
-      var answer = Math.floor(Math.random() * ((this.maxCust + 1) - this.minCust)) + this.minCust;
-      var cookiePerHr = Math.floor(answer * this.avgSale);
-      var liEl = document.createElement('li');
-      liEl.textContent = `${hours[i]}: ${cookiePerHr} cookies.`;
-      alkiUl.appendChild(liEl);
-      this.sum.push(cookiePerHr);
-      this.total = cookiePerHr + this.total;
-    }
-  }
-};
-
-alki.render();
-var liEl = document.createElement('li');
-liEl.textContent = `Total: ${alki.total} cookies.`;
-alkiUl.appendChild(liEl);
-console.log('alki.sum',alki.sum);
-console.log('alki.total',alki.total);
