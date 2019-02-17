@@ -20,7 +20,7 @@ function Location(name, minCust, maxCust, avgSale, sum, total) {
   }
 }
 
-var pike = new Location('Pike Place', 23, 65, 6.3, [], 0);
+var pike = new Location('1st and Pike', 23, 65, 6.3, [], 0);
 var seatac = new Location('SeaTac Airport', 3, 24, 1.2, [], 0);
 var center = new Location('Seattle Center', 11, 38, 3.7, [], 0);
 var hill = new Location('Capital Hill', 20, 38, 2.3, [], 0);
@@ -53,4 +53,21 @@ for (var i = 0; i < locations.length; i++) {
   }
   table.appendChild(row);
 }
+
+var footerRow = document.createElement('tr');
+var totals = document.createElement('td');
+totals.innerText ='Totals';
+footerRow.appendChild(totals);
+
+for (var r = 0; r < hours.length; r++) {
+  var footer = document.createElement('td');
+  var hourlyTotal = 0;
+  for(var lastRow = 0; lastRow < locations.length; lastRow++) {
+    hourlyTotal = hourlyTotal + locations[lastRow].sum[r];
+  }
+  footer.innerText = hourlyTotal;
+  footerRow.appendChild(footer);
+}
+
+table.appendChild(footerRow);
 
