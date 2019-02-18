@@ -3,6 +3,7 @@
 var hours = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm', '8pm',];
 
 var table = document.getElementById('shell');
+var table2 = document.getElementById('staff');
 
 function Location(name, minCust, maxCust, avgSale, sum, total) {
   this.name = name;
@@ -72,8 +73,8 @@ headerRow.appendChild(lastDesc);
 table.appendChild(headerRow);
 
 // Render row locations
-for (var i = 0; i < locations.length; i++) {
-  locations[i].render();
+for (var index = 0; index < locations.length; index++) {
+  locations[index].render();
 }
 
 // Bottom row for totals
@@ -102,3 +103,5 @@ for (var st = 0; st < locations.length; st++) {
 }
 grandTotal.innerText = salesTotal;
 footerRow.appendChild(grandTotal);
+
+

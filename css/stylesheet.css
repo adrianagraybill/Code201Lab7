@@ -1,5 +1,5 @@
 th {
-    background: rgb(177, 177, 177);
+    background: rgb(85, 85, 85);
     padding: 15px;
     border: solid 1px;
     text-align: center;
@@ -12,19 +12,16 @@ tr td {
     padding: 5px;
 }  
 
-tr:last-child {
-    background-color: rgb(209, 185, 169);
-}
-
 * {
     background-color: rgb(220, 235, 235);
     font-family: Arial, Helvetica, sans-serif;
 }
 
 td:first-child {
-    background-color: honeydew;
+    background-color: rgb(181, 225, 228);
 }
 
 td:last-child {
-    background-color: rgb(209, 185, 169);
+    background-color: rgb(248, 130, 94);
 }
+ 
