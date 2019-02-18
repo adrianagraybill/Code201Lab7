@@ -3,6 +3,7 @@
 var hours = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm', '8pm',];
 
 var table = document.getElementById('shell');
+var table2 = document.getElementById('staff');
 
 function Location(name, minCust, maxCust, avgSale, sum, total) {
   this.name = name;
@@ -11,7 +12,7 @@ function Location(name, minCust, maxCust, avgSale, sum, total) {
   this.avgSale = avgSale;
   this.sum = sum;
   this.total = total;
-  
+
   for (var i = 0; i < hours.length; i++) {
     var answer = Math.floor(Math.random() * ((this.maxCust + 1) - this.minCust)) + this.minCust;
     var cookiePerHr = Math.floor(answer * this.avgSale);
@@ -19,7 +20,7 @@ function Location(name, minCust, maxCust, avgSale, sum, total) {
     this.total = cookiePerHr + this.total;
   }
 
-  this.render = function(){ 
+  this.render = function () {
     // Location name
     var row = document.createElement('tr');
     var locName = document.createElement('td');
@@ -49,7 +50,7 @@ var center = new Location('Seattle Center', 11, 38, 3.7, [], 0);
 var hill = new Location('Capital Hill', 20, 38, 2.3, [], 0);
 var alki = new Location('Alki', 2, 16, 4.6, [], 0);
 
-var locations = [pike,seatac,center,hill,alki];
+var locations = [pike, seatac, center, hill, alki];
 
 // One blank item in header row
 var headerRow = document.createElement('tr');
@@ -64,7 +65,7 @@ for (var i = 0; i < hours.length; i++) {
 }
 
 // Daily total label
-var lastDesc = document.createElement('td');
+var lastDesc = document.createElement('th');
 lastDesc.innerText = 'Daily Location Total';
 headerRow.appendChild(lastDesc);
 
@@ -72,20 +73,20 @@ headerRow.appendChild(lastDesc);
 table.appendChild(headerRow);
 
 // Render row locations
-for (var i = 0; i < locations.length; i++) {
-  locations[i].render();
+for (var index = 0; index < locations.length; index++) {
+  locations[index].render();
 }
 
 // Bottom row for totals
 var footerRow = document.createElement('tr');
 var totals = document.createElement('td');
-totals.innerText ='Totals';
+totals.innerText = 'Totals';
 footerRow.appendChild(totals);
 
 for (var r = 0; r < hours.length; r++) {
   var footer = document.createElement('td');
   var hourlyTotal = 0;
-  for(var lastRow = 0; lastRow < locations.length; lastRow++) {
+  for (var lastRow = 0; lastRow < locations.length; lastRow++) {
     hourlyTotal = hourlyTotal + locations[lastRow].sum[r];
   }
   footer.innerText = hourlyTotal;
@@ -93,4 +94,14 @@ for (var r = 0; r < hours.length; r++) {
 }
 
 table.appendChild(footerRow);
+
+// Grand total
+var grandTotal = document.createElement('td');
+var salesTotal = 0;
+for (var st = 0; st < locations.length; st++) {
+  salesTotal = salesTotal + locations[st].total;
+}
+grandTotal.innerText = salesTotal;
+footerRow.appendChild(grandTotal);
+
 
