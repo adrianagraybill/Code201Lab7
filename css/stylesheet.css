@@ -12,7 +12,19 @@ tr td {
     padding: 5px;
 }  
 
-* {
-    background-color: rgb(220, 235, 235);
+tr:last-child {
+    background-color: rgb(209, 185, 169);
 }
 
+* {
+    background-color: rgb(220, 235, 235);
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+td:first-child {
+    background-color: honeydew;
+}
+
+td:last-child {
+    background-color: rgb(209, 185, 169);
+}
